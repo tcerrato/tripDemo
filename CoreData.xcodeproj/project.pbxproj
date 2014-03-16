@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F922577C18D648DA0045D637 /* TripItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F922577B18D648DA0045D637 /* TripItem.m */; };
 		F99D045C18D238FA00E242BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99D045B18D238FA00E242BF /* Foundation.framework */; };
 		F99D045E18D238FA00E242BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99D045D18D238FA00E242BF /* CoreGraphics.framework */; };
 		F99D046018D238FA00E242BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99D045F18D238FA00E242BF /* UIKit.framework */; };
@@ -22,6 +23,9 @@
 		F99D047D18D238FB00E242BF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99D046118D238FA00E242BF /* CoreData.framework */; };
 		F99D048518D238FB00E242BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F99D048318D238FB00E242BF /* InfoPlist.strings */; };
 		F99D048718D238FB00E242BF /* CoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D048618D238FB00E242BF /* CoreDataTests.m */; };
+		F99D049118D4C34800E242BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99D049018D4C34800E242BF /* Main.storyboard */; };
+		F99D049418D4C43800E242BF /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D049318D4C43800E242BF /* CoreDataViewController.m */; };
+		F99D04DB18D4FC8900E242BF /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D04DA18D4FC8900E242BF /* CoreDataTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F922577A18D648DA0045D637 /* TripItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripItem.h; path = ../TripItem.h; sourceTree = "<group>"; };
+		F922577B18D648DA0045D637 /* TripItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripItem.m; path = ../TripItem.m; sourceTree = "<group>"; };
 		F99D045818D238FA00E242BF /* CoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99D045B18D238FA00E242BF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F99D045D18D238FA00E242BF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +59,11 @@
 		F99D048218D238FB00E242BF /* CoreDataTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreDataTests-Info.plist"; sourceTree = "<group>"; };
 		F99D048418D238FB00E242BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F99D048618D238FB00E242BF /* CoreDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataTests.m; sourceTree = "<group>"; };
+		F99D049018D4C34800E242BF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		F99D049218D4C43800E242BF /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
+		F99D049318D4C43800E242BF /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
+		F99D04D918D4FC8900E242BF /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		F99D04DA18D4FC8900E242BF /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,10 +127,17 @@
 			isa = PBXGroup;
 			children = (
 				F99D046C18D238FB00E242BF /* CoreDataAppDelegate.h */,
+				F922577A18D648DA0045D637 /* TripItem.h */,
+				F922577B18D648DA0045D637 /* TripItem.m */,
+				F99D049018D4C34800E242BF /* Main.storyboard */,
+				F99D04D918D4FC8900E242BF /* CoreDataTableViewController.h */,
+				F99D04DA18D4FC8900E242BF /* CoreDataTableViewController.m */,
 				F99D046D18D238FB00E242BF /* CoreDataAppDelegate.m */,
 				F99D047218D238FB00E242BF /* Images.xcassets */,
 				F99D046F18D238FB00E242BF /* CoreData.xcdatamodeld */,
 				F99D046418D238FB00E242BF /* Supporting Files */,
+				F99D049218D4C43800E242BF /* CoreDataViewController.h */,
+				F99D049318D4C43800E242BF /* CoreDataViewController.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -229,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F99D049118D4C34800E242BF /* Main.storyboard in Resources */,
 				F99D046818D238FB00E242BF /* InfoPlist.strings in Resources */,
 				F99D047318D238FB00E242BF /* Images.xcassets in Resources */,
 			);
@@ -250,8 +269,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F99D046A18D238FB00E242BF /* main.m in Sources */,
+				F99D049418D4C43800E242BF /* CoreDataViewController.m in Sources */,
 				F99D046E18D238FB00E242BF /* CoreDataAppDelegate.m in Sources */,
+				F922577C18D648DA0045D637 /* TripItem.m in Sources */,
 				F99D047118D238FB00E242BF /* CoreData.xcdatamodeld in Sources */,
+				F99D04DB18D4FC8900E242BF /* CoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +470,7 @@
 				F99D048C18D238FB00E242BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F99D048D18D238FB00E242BF /* Build configuration list for PBXNativeTarget "CoreDataTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +479,7 @@
 				F99D048F18D238FB00E242BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
