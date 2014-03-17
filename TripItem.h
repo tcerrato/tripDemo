@@ -14,4 +14,9 @@
 @property NSString *address;
 @property NSString *phone;
 
+
+// tony this would be for completion state
+// @property BOOL completed;
+
+
 @end

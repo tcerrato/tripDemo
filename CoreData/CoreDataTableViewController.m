@@ -59,8 +59,8 @@
     
     TripItem *item1 = [[TripItem alloc] init];
     item1.name = @"Buy milk";
-    item1.address = @"Buy milk";
-    item1.phone = @"Buy milk";
+   // item1.address = @"Buy milk";
+  //  item1.phone = @"Buy milk";
     
     [self.tripItems addObject:item1];
 
@@ -83,8 +83,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 1;
 }
 
@@ -95,8 +93,8 @@
     //return 0;
   
      // NSLog(@"tony is here", self.tripItems);
-     //return [self.tripItems count];
-    return 3;
+     return [self.tripItems count];
+
     
 }
 
@@ -107,10 +105,23 @@
     
         static NSString *CellIdentifier = @"ListPrototypeCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        TripItem *toDoItem = [self.tripItems objectAtIndex:indexPath.row];
-        cell.textLabel.text = toDoItem.name;
+        TripItem *myTripItem = [self.tripItems objectAtIndex:indexPath.row];
+        cell.textLabel.text = myTripItem.name;
+    
+    // tony dont think I need completion state
+//    if (myTripItem.completed) {
+ //       cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//    } else {
+//        cell.accessoryType = UITableViewCellAccessoryNone;
+//    }
+//    return cell;
+    
         return cell;
 }
+
+
+
+
 
 
 /*
@@ -161,5 +172,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    TripItem *tappedItem = [self.tripItems objectAtIndex:indexPath.row];
+   // tappedItem.completed = !tappedItem.completed;
+   // [tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
+}
+
+
 
 @end
