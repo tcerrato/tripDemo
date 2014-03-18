@@ -143,4 +143,135 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+
+
+
+// Tony try to add a method here for get all core data info
+
+-(NSArray*)getAllPhoneBookRecords
+{
+    
+    // tony adding these might not need em
+    
+    
+    
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              
+                                              entityForName:@"Contacts" inManagedObjectContext:moc];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:entityDescription];
+    
+    
+    NSError* error;
+    
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    
+    if ([array count] == 0) {
+       NSString *foo = @"No matches";
+    } else {
+        
+        NSUInteger count = [array count];
+        
+        NSLog(@"First german make: %@", array[0]);
+
+        NSLog(@"First U.K. make: %@", [array objectAtIndex:0]);
+        
+        NSManagedObject *matches = nil;
+        matches = array[0];
+        NSString *name = [matches valueForKey:@"name"];
+        NSString *address = [matches valueForKey:@"address"];
+        NSString *phone = [matches valueForKey:@"phone"];
+
+        NSLog(@"Name: %@", name);
+        NSLog(@"Address : %@", address);
+        NSLog(@"Phone: %@", phone);
+        
+        
+        
+    }
+    
+    
+    
+    return array;
+    
+    
+    
+    /*
+    CoreDataAppDelegate *appDelegate =
+    [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context =
+    [appDelegate managedObjectContext];
+    
+    // tony end adding these
+    
+    // initializing NSFetchRequest
+   // NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Contacts"inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+
+    
+    NSError* error;
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+     */
+     
+    // Returning Fetched Records
+   // return fetchedRecords;
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end

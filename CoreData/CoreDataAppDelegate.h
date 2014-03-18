@@ -19,4 +19,6 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+-(NSArray*)getAllPhoneBookRecords;  // tony added as a way to get all records from core data
+
 @end

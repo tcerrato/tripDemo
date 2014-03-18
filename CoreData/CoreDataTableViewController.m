@@ -8,12 +8,17 @@
 
 #import "CoreDataTableViewController.h"
 #import "TripItem.h"
+#import "CoreDataAppDelegate.h" // Tony I added this
 
 @interface CoreDataTableViewController ()
 
 
 // tony trying to load my list of core data objects here
 @property NSMutableArray *tripItems;
+
+//tony I added this to get managed context data
+@property (nonatomic,strong)NSArray* fetchedContactsArray;
+
 
 
 
@@ -26,6 +31,8 @@
 // Tony added this to unwind
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
+    
+    
 }
 
 
@@ -47,8 +54,35 @@
     - (void)viewDidLoad
     {
         [super viewDidLoad];
-        self.tripItems = [[NSMutableArray alloc] init]; // Array of trip items I want to get from core data
-        [self loadInitialData];
+        
+        // Tony load my array here with core data
+        CoreDataAppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+        
+        // Fetching Records and saving it in "fetchedRecordsArray" object
+        self.fetchedContactsArray = [appDelegate getAllPhoneBookRecords];
+        
+        // tony sandbox to try and get a managed object to load a string
+        // this does get the data from the _fetchedContacsArray and can get values out of it but seems odd
+        // research best way to do this
+        NSManagedObject *matches = nil;
+        matches = _fetchedContactsArray[0];
+        NSString *name = [matches valueForKey:@"name"];
+        NSString *address = [matches valueForKey:@"address"];
+        NSString *phone = [matches valueForKey:@"phone"];
+        
+        NSLog(@"Name: %@", name);
+        NSLog(@"Address : %@", address);
+        NSLog(@"Phone: %@", phone);
+        // end sandbox
+        
+        
+        [self.tableView reloadData];
+        
+        
+        
+        
+//        self.tripItems = [[NSMutableArray alloc] init]; // Array of trip items I want to get from core data
+//        [self loadInitialData];
         
     }
 
@@ -59,10 +93,19 @@
     
     TripItem *item1 = [[TripItem alloc] init];
     item1.name = @"Buy milk";
-   // item1.address = @"Buy milk";
+    item1.address = @"cheese";
   //  item1.phone = @"Buy milk";
     
     [self.tripItems addObject:item1];
+    
+    
+    TripItem *item2 = [[TripItem alloc] init];
+
+    item2.name = @"item 2";
+    item2.address = @"more item 2";
+    //  item1.phone = @"Buy milk";
+    
+    [self.tripItems addObject:item2];
 
     
 
@@ -102,11 +145,17 @@
 // tony this is where I am broken
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
         static NSString *CellIdentifier = @"ListPrototypeCell";
+    
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
         TripItem *myTripItem = [self.tripItems objectAtIndex:indexPath.row];
-        cell.textLabel.text = myTripItem.name;
+    
+        NSString *combine =   [myTripItem.name stringByAppendingString:myTripItem.address]; //tony hack to concatinate a string
+    
+    
+        cell.textLabel.text = combine;
+    
     
     // tony dont think I need completion state
 //    if (myTripItem.completed) {

@@ -127,12 +127,12 @@
 			isa = PBXGroup;
 			children = (
 				F99D046C18D238FB00E242BF /* CoreDataAppDelegate.h */,
+				F99D046D18D238FB00E242BF /* CoreDataAppDelegate.m */,
 				F922577A18D648DA0045D637 /* TripItem.h */,
 				F922577B18D648DA0045D637 /* TripItem.m */,
 				F99D049018D4C34800E242BF /* Main.storyboard */,
 				F99D04D918D4FC8900E242BF /* CoreDataTableViewController.h */,
 				F99D04DA18D4FC8900E242BF /* CoreDataTableViewController.m */,
-				F99D046D18D238FB00E242BF /* CoreDataAppDelegate.m */,
 				F99D047218D238FB00E242BF /* Images.xcassets */,
 				F99D046F18D238FB00E242BF /* CoreData.xcdatamodeld */,
 				F99D046418D238FB00E242BF /* Supporting Files */,
