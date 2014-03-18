@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FCE29B54-C2EB-4C37-90F0-71F8E1526CEB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CoreData</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8A5831CF-4862-4821-B4CD-6AAAA8CE0270</key>
+		<string>ssh://github.com/tcerrato/tripDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CoreData.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8A5831CF-4862-4821-B4CD-6AAAA8CE0270</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/tcerrato/tripDemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8A5831CF-4862-4821-B4CD-6AAAA8CE0270</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8A5831CF-4862-4821-B4CD-6AAAA8CE0270</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tripDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

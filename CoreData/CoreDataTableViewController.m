@@ -9,6 +9,7 @@
 #import "CoreDataTableViewController.h"
 #import "TripItem.h"
 #import "CoreDataAppDelegate.h" // Tony I added this
+#import "Contacts.h"
 
 @interface CoreDataTableViewController ()
 
@@ -18,6 +19,7 @@
 
 //tony I added this to get managed context data
 @property (nonatomic,strong)NSArray* fetchedContactsArray;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext; // Tony added
 
 
 
@@ -54,35 +56,11 @@
     - (void)viewDidLoad
     {
         [super viewDidLoad];
-        
-        // Tony load my array here with core data
         CoreDataAppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
         
         // Fetching Records and saving it in "fetchedRecordsArray" object
         self.fetchedContactsArray = [appDelegate getAllPhoneBookRecords];
-        
-        // tony sandbox to try and get a managed object to load a string
-        // this does get the data from the _fetchedContacsArray and can get values out of it but seems odd
-        // research best way to do this
-        NSManagedObject *matches = nil;
-        matches = _fetchedContactsArray[0];
-        NSString *name = [matches valueForKey:@"name"];
-        NSString *address = [matches valueForKey:@"address"];
-        NSString *phone = [matches valueForKey:@"phone"];
-        
-        NSLog(@"Name: %@", name);
-        NSLog(@"Address : %@", address);
-        NSLog(@"Phone: %@", phone);
-        // end sandbox
-        
-        
         [self.tableView reloadData];
-        
-        
-        
-        
-//        self.tripItems = [[NSMutableArray alloc] init]; // Array of trip items I want to get from core data
-//        [self loadInitialData];
         
     }
 
@@ -136,7 +114,7 @@
     //return 0;
   
      // NSLog(@"tony is here", self.tripItems);
-     return [self.tripItems count];
+     return [self.fetchedContactsArray count];
 
     
 }
@@ -145,27 +123,15 @@
 // tony this is where I am broken
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        static NSString *CellIdentifier = @"ListPrototypeCell";
     
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-        TripItem *myTripItem = [self.tripItems objectAtIndex:indexPath.row];
-    
-        NSString *combine =   [myTripItem.name stringByAppendingString:myTripItem.address]; //tony hack to concatinate a string
-    
-    
-        cell.textLabel.text = combine;
+    // Tony got this to not be red by creating a Contacts class for the data model
+    static NSString *CellIdentifier = @"ListPrototypeCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    Contacts * contacts = [self.fetchedContactsArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@, %@ ",contacts.name,contacts.address,contacts.phone];
+    return cell;
     
     
-    // tony dont think I need completion state
-//    if (myTripItem.completed) {
- //       cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//    } else {
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//    }
-//    return cell;
-    
-        return cell;
 }
 
 

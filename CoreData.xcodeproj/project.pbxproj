@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6EEB8F5F18D8B77B00CE1B5A /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEB8F5E18D8B77B00CE1B5A /* Contacts.m */; };
 		F922577C18D648DA0045D637 /* TripItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F922577B18D648DA0045D637 /* TripItem.m */; };
 		F99D045C18D238FA00E242BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99D045B18D238FA00E242BF /* Foundation.framework */; };
 		F99D045E18D238FA00E242BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99D045D18D238FA00E242BF /* CoreGraphics.framework */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6EEB8F5D18D8B77B00CE1B5A /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contacts.h; sourceTree = "<group>"; };
+		6EEB8F5E18D8B77B00CE1B5A /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contacts.m; sourceTree = "<group>"; };
 		F922577A18D648DA0045D637 /* TripItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripItem.h; path = ../TripItem.h; sourceTree = "<group>"; };
 		F922577B18D648DA0045D637 /* TripItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripItem.m; path = ../TripItem.m; sourceTree = "<group>"; };
 		F99D045818D238FA00E242BF /* CoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +141,8 @@
 				F99D046418D238FB00E242BF /* Supporting Files */,
 				F99D049218D4C43800E242BF /* CoreDataViewController.h */,
 				F99D049318D4C43800E242BF /* CoreDataViewController.m */,
+				6EEB8F5D18D8B77B00CE1B5A /* Contacts.h */,
+				6EEB8F5E18D8B77B00CE1B5A /* Contacts.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				F922577C18D648DA0045D637 /* TripItem.m in Sources */,
 				F99D047118D238FB00E242BF /* CoreData.xcdatamodeld in Sources */,
 				F99D04DB18D4FC8900E242BF /* CoreDataTableViewController.m in Sources */,
+				6EEB8F5F18D8B77B00CE1B5A /* Contacts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -151,10 +151,31 @@
 -(NSArray*)getAllPhoneBookRecords
 {
     
+    
+    
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contacts"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return fetchedRecords;
+    
+    
+    
+    
+    
     // tony adding these might not need em
     
     
-    
+ /* Tony mu code here works but I want to return fetched record
     NSManagedObjectContext *moc = [self managedObjectContext];
     
     NSEntityDescription *entityDescription = [NSEntityDescription
@@ -165,11 +186,9 @@
     
     [request setEntity:entityDescription];
     
-    
     NSError* error;
     
     NSArray *array = [moc executeFetchRequest:request error:&error];
-    
     
     if ([array count] == 0) {
        NSString *foo = @"No matches";
@@ -190,45 +209,18 @@
         NSLog(@"Name: %@", name);
         NSLog(@"Address : %@", address);
         NSLog(@"Phone: %@", phone);
-        
-        
-        
+
     }
     
     
     
     return array;
+*/
     
     
     
-    /*
-    CoreDataAppDelegate *appDelegate =
-    [[UIApplication sharedApplication] delegate];
     
-    NSManagedObjectContext *context =
-    [appDelegate managedObjectContext];
-    
-    // tony end adding these
-    
-    // initializing NSFetchRequest
-   // NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    //Setting Entity to be Queried
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Contacts"inManagedObjectContext:context];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDesc];
 
-    
-    NSError* error;
-    
-    // Query on managedObjectContext With Generated fetchRequest
-    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:request error:&error];
-    
-     */
-     
-    // Returning Fetched Records
-   // return fetchedRecords;
     
     
 }
