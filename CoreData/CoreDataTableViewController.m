@@ -33,7 +33,8 @@
 // Tony added this to unwind
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
-    
+
+    [self viewDidLoad]; //Tony This releads the page on inwind and shows all new data
     
 }
 
@@ -52,17 +53,22 @@
 }
 
 
-    // Tony this is me trying to load an array of items here to display in the list
-    - (void)viewDidLoad
-    {
-        [super viewDidLoad];
-        CoreDataAppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+
+
+
+// Tony this is me trying to load an array of items here to display in the list
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    CoreDataAppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
         
-        // Fetching Records and saving it in "fetchedRecordsArray" object
-        self.fetchedContactsArray = [appDelegate getAllPhoneBookRecords];
-        [self.tableView reloadData];
+    // Fetching Records and saving it in "fetchedRecordsArray" object
+    self.fetchedContactsArray = [appDelegate getAllPhoneBookRecords];
+    [self.tableView reloadData];
         
-    }
+}
+
+
+
 
 
 // Tony through away method to load fake data replace code here maybe with load from core data!!!!!!
@@ -76,7 +82,6 @@
     
     [self.tripItems addObject:item1];
     
-    
     TripItem *item2 = [[TripItem alloc] init];
 
     item2.name = @"item 2";
@@ -84,8 +89,6 @@
     //  item1.phone = @"Buy milk";
     
     [self.tripItems addObject:item2];
-
-    
 
 }
 
@@ -100,12 +103,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -123,12 +128,19 @@
 // tony this is where I am broken
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     // Tony got this to not be red by creating a Contacts class for the data model
     static NSString *CellIdentifier = @"ListPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     Contacts * contacts = [self.fetchedContactsArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@, %@ ",contacts.name,contacts.address,contacts.phone];
+    
+    //Tony returns core data all on 1 line
+    //cell.textLabel.text = [NSString stringWithFormat:@"%@, %@, %@ ",contacts.name,contacts.address,contacts.phone];
+    //cell.detailTextLabel.text = @"tony is here";  // Changed cell style to subtle and this writes to the second text line
+    
+    // Tony Drops phone number down to second line
+    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@ ",contacts.name,contacts.address];
+    cell.detailTextLabel.text = contacts.phone;
+    
     return cell;
     
     
