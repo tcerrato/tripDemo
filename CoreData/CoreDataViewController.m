@@ -73,6 +73,8 @@
     [context save:&error];
     _status.text = @"Contact saved";
     
+    [self.view endEditing:YES];  // Tony dismiss the keyboard after saving
+    
 }
 
 - (IBAction)findContact:(id)sender {
