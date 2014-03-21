@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CoreDataAppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
 
 
 @interface CoreDataViewController : UIViewController
 
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UITextField *name;
 @property (weak, nonatomic) IBOutlet UITextField *address;
 @property (weak, nonatomic) IBOutlet UITextField *phone;

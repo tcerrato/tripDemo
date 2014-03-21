@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 Tony Cerrato. All rights reserved.
 //
 
+
+// Should these go in the .H file
 #import "CoreDataViewController.h"
-#import <CoreLocation/CoreLocation.h>
+#import "CoreDataAppDelegate.h"
 
 
 //@interface phoneLocationViewController : UIViewController <CLLocationManagerDelegate> {
 
 
-@interface CoreDataViewController ()
-   @property (strong, nonatomic) CLLocationManager *locationManager;
-@end
+
 
 //@interface NSObject(Private)<CLLocationManagerDelegate>
 //    @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -25,6 +25,9 @@
 
 @implementation CoreDataViewController
 
+    // TONY adding these to store info for geocodeing.
+    CLGeocoder *geocoder;
+    CLPlacemark *placemark;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,8 +42,18 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    //tony new start up location services here
+    _locationManager = [[CLLocationManager alloc] init];
+    [_locationManager setDelegate:self];
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    geocoder = [[CLGeocoder alloc] init];
+     [_locationManager startUpdatingLocation];
+   
+    
 }
 
 
@@ -63,34 +76,23 @@
 
 
 
+
+
+
+
 // tony created a location button for now and linked it to this
 // todo need an if location - null try again
+//  This is null on first button push should enable locations on page load then just use it on button click
 - (IBAction)getLocation:(id)sender {
 
-    // Create the location manager if this object does not
-    
-    // already have one.
-    
-    if (nil == _locationManager)
-        
-        _locationManager = [[CLLocationManager alloc] init];
+   // start with do I have one yet and do I need one
     
     
-    
-    _locationManager.delegate = self;
-    
-    _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;  // Tony how far I want the accuracy to be
-    
-    // Set a movement threshold for new events.
-    _locationManager.distanceFilter = 500; // meters
-    
-    
-    [_locationManager startUpdatingLocation];
-    
+    // wait here for start updating location to get data  locationManager:didUpdateToLocation:fromLocation
 
     CLLocation *location = _locationManager.location;
     
-    NSLog(@"%@", location);
+    NSLog(@"%@", location); // Just logging delete
     
      _status.text = [NSString stringWithFormat: @"location=%@", location]; // Tony this formats a object into a string
     
@@ -99,8 +101,32 @@
     
     float latitude = _locationManager.location.coordinate.latitude;
     float longitude = _locationManager.location.coordinate.longitude;
-    NSLog(@"%.8f",latitude);
-    NSLog(@"%.8f",longitude);
+    
+    NSLog(@"%.8f",latitude); // Just logging delete
+    NSLog(@"%.8f",longitude); // Just logging delete
+    
+    
+
+    ///// sandbox below
+    
+    
+    // Reverse Geocoding.  This takes a location object and returns an address.  Works
+    NSLog(@"Resolving the Address");
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
+        if (error == nil && [placemarks count] > 0) {
+            placemark = [placemarks lastObject];
+            _status.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
+                                 placemark.subThoroughfare, placemark.thoroughfare,
+                                 placemark.postalCode, placemark.locality,
+                                 placemark.administrativeArea,
+                                 placemark.country];
+        } else {
+            NSLog(@"%@", error.debugDescription);
+        }
+    } ];
+    
+    
     
     
 }
