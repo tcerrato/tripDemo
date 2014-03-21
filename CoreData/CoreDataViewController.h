@@ -22,6 +22,6 @@
 
 - (IBAction)saveData:(id)sender;
 - (IBAction)findContact:(id)sender;
-
+- (IBAction)getLocation:(id)sender;
 
 @end

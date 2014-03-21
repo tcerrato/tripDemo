@@ -48,10 +48,7 @@
     
     //tony new start up location services here
     _locationManager = [[CLLocationManager alloc] init];
-    [_locationManager setDelegate:self];
-    [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    geocoder = [[CLGeocoder alloc] init];
-     [_locationManager startUpdatingLocation];
+
    
     
 }
@@ -87,49 +84,51 @@
 
    // start with do I have one yet and do I need one
     
-    
-    // wait here for start updating location to get data  locationManager:didUpdateToLocation:fromLocation
+    [_locationManager setDelegate:self];
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    geocoder = [[CLGeocoder alloc] init]; // geo coding to get address
+    [_locationManager startUpdatingLocation]; // start the update service
 
-    CLLocation *location = _locationManager.location;
-    
-    NSLog(@"%@", location); // Just logging delete
-    
-     _status.text = [NSString stringWithFormat: @"location=%@", location]; // Tony this formats a object into a string
-    
-    
-  // _status.text = @"Contact location", *tony;
-    
-    float latitude = _locationManager.location.coordinate.latitude;
-    float longitude = _locationManager.location.coordinate.longitude;
-    
-    NSLog(@"%.8f",latitude); // Just logging delete
-    NSLog(@"%.8f",longitude); // Just logging delete
-    
-    
+}
 
-    ///// sandbox below
+
+
+// This code should feed the location manager becuase it has been assigned a deligate
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    CLLocation *currentLocation = newLocation;
     
+    if (currentLocation != nil) {
+        _status.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+        NSLog(@"longitude: %@", [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
+        
+        _status.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+         NSLog(@"latitude: %@", [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
+    }
     
-    // Reverse Geocoding.  This takes a location object and returns an address.  Works
+    // Stop Location Manager
+    [_locationManager stopUpdatingLocation];
+    
     NSLog(@"Resolving the Address");
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
             _status.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
-                                 placemark.subThoroughfare, placemark.thoroughfare,
-                                 placemark.postalCode, placemark.locality,
-                                 placemark.administrativeArea,
-                                 placemark.country];
+                            placemark.subThoroughfare, placemark.thoroughfare,
+                            placemark.postalCode, placemark.locality,
+                            placemark.administrativeArea,
+                            placemark.country];
         } else {
             NSLog(@"%@", error.debugDescription);
         }
     } ];
     
-    
-    
-    
 }
+
+
+
 
 
 
