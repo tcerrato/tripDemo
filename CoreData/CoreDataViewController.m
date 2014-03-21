@@ -7,10 +7,20 @@
 //
 
 #import "CoreDataViewController.h"
+#import <CoreLocation/CoreLocation.h>
+
+
+//@interface phoneLocationViewController : UIViewController <CLLocationManagerDelegate> {
+
 
 @interface CoreDataViewController ()
-
+   @property (strong, nonatomic) CLLocationManager *locationManager;
 @end
+
+//@interface NSObject(Private)<CLLocationManagerDelegate>
+//    @property (strong, nonatomic) CLLocationManager *locationManager;
+
+//@end
 
 
 @implementation CoreDataViewController
@@ -50,6 +60,52 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+// tony created a location button for now and linked it to this
+// todo need an if location - null try again
+- (IBAction)getLocation:(id)sender {
+
+    // Create the location manager if this object does not
+    
+    // already have one.
+    
+    if (nil == _locationManager)
+        
+        _locationManager = [[CLLocationManager alloc] init];
+    
+    
+    
+    _locationManager.delegate = self;
+    
+    _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;  // Tony how far I want the accuracy to be
+    
+    // Set a movement threshold for new events.
+    _locationManager.distanceFilter = 500; // meters
+    
+    
+    [_locationManager startUpdatingLocation];
+    
+
+    CLLocation *location = _locationManager.location;
+    
+    NSLog(@"%@", location);
+    
+     _status.text = [NSString stringWithFormat: @"location=%@", location]; // Tony this formats a object into a string
+    
+    
+  // _status.text = @"Contact location", *tony;
+    
+    float latitude = _locationManager.location.coordinate.latitude;
+    float longitude = _locationManager.location.coordinate.longitude;
+    NSLog(@"%.8f",latitude);
+    NSLog(@"%.8f",longitude);
+    
+    
+}
+
+
 
 
 - (IBAction)saveData:(id)sender {
