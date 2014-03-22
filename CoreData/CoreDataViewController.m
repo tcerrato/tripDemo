@@ -12,16 +12,6 @@
 #import "CoreDataAppDelegate.h"
 
 
-//@interface phoneLocationViewController : UIViewController <CLLocationManagerDelegate> {
-
-
-
-
-//@interface NSObject(Private)<CLLocationManagerDelegate>
-//    @property (strong, nonatomic) CLLocationManager *locationManager;
-
-//@end
-
 
 @implementation CoreDataViewController
 
@@ -45,12 +35,9 @@
      [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
     //tony new start up location services here
     _locationManager = [[CLLocationManager alloc] init];
 
-   
-    
 }
 
 
@@ -93,6 +80,8 @@
 
 
 
+
+
 // This code should feed the location manager becuase it has been assigned a deligate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
@@ -112,17 +101,33 @@
     
     NSLog(@"Resolving the Address");
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+       
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
+        
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
-            _status.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
+            
+            // tony this was _status label but I want this int he text box
+            _startLocation.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
                             placemark.subThoroughfare, placemark.thoroughfare,
                             placemark.postalCode, placemark.locality,
                             placemark.administrativeArea,
                             placemark.country];
+            
+            //tony some debugging to see how placemark breaks down
+             NSLog(@"%@", placemark.subThoroughfare); // address number
+             NSLog(@"%@", placemark.thoroughfare);   // address St
+             NSLog(@"%@", placemark.postalCode);   // zip
+             NSLog(@"%@", placemark.locality);  // city
+             NSLog(@"%@",  placemark.administrativeArea);  // state
+             NSLog(@"%@", placemark.country);   // country
+
+            
+            
         } else {
             NSLog(@"%@", error.debugDescription);
         }
+        
     } ];
     
 }
@@ -196,6 +201,10 @@
     
     
 }
+
+
+
+
 
 
 
