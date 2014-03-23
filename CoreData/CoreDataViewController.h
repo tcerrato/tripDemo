@@ -12,17 +12,15 @@
 
 @interface CoreDataViewController : UIViewController
 
-
+- (IBAction)endTrip:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextView *endLocation;
 @property (weak, nonatomic) IBOutlet UITextView *startLocation;
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (weak, nonatomic) IBOutlet UITextField *name;
-@property (weak, nonatomic) IBOutlet UITextField *address;
-@property (weak, nonatomic) IBOutlet UITextField *phone;
 @property (weak, nonatomic) IBOutlet UILabel *status;
 
 
 - (IBAction)saveData:(id)sender;
-- (IBAction)findContact:(id)sender;
+//- (IBAction)findContact:(id)sender;
 - (IBAction)getLocation:(id)sender;
 
 

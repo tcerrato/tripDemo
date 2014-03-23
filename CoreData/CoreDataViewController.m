@@ -18,6 +18,7 @@
     // TONY adding these to store info for geocodeing.
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
+   // CLLocation *currentLocation;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -74,8 +75,15 @@
     [_locationManager setDelegate:self];
     [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     geocoder = [[CLGeocoder alloc] init]; // geo coding to get address
+    
     [_locationManager startUpdatingLocation]; // start the update service
 
+    
+    
+
+    
+    
+    
 }
 
 
@@ -83,6 +91,8 @@
 
 
 // This code should feed the location manager becuase it has been assigned a deligate
+// this needs to return an object so the start and end buttons
+// should return the placemark
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"didUpdateToLocation: %@", newLocation);
@@ -93,15 +103,16 @@
         NSLog(@"longitude: %@", [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
         
         _status.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
-         NSLog(@"latitude: %@", [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
+        NSLog(@"latitude: %@", [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
     }
     
     // Stop Location Manager
     [_locationManager stopUpdatingLocation];
     
     NSLog(@"Resolving the Address");
+    
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-       
+        
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         
         if (error == nil && [placemarks count] > 0) {
@@ -109,28 +120,32 @@
             
             // tony this was _status label but I want this int he text box
             _startLocation.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
-                            placemark.subThoroughfare, placemark.thoroughfare,
-                            placemark.postalCode, placemark.locality,
-                            placemark.administrativeArea,
-                            placemark.country];
+                                   placemark.subThoroughfare, placemark.thoroughfare,
+                                   placemark.postalCode, placemark.locality,
+                                   placemark.administrativeArea,
+                                   placemark.country];
             
             //tony some debugging to see how placemark breaks down
-             NSLog(@"%@", placemark.subThoroughfare); // address number
-             NSLog(@"%@", placemark.thoroughfare);   // address St
-             NSLog(@"%@", placemark.postalCode);   // zip
-             NSLog(@"%@", placemark.locality);  // city
-             NSLog(@"%@",  placemark.administrativeArea);  // state
-             NSLog(@"%@", placemark.country);   // country
-
+            NSLog(@"%@", placemark.subThoroughfare); // address number
+            NSLog(@"%@", placemark.thoroughfare); // address St
+            NSLog(@"%@", placemark.postalCode); // zip
+            NSLog(@"%@", placemark.locality); // city
+            NSLog(@"%@", placemark.administrativeArea); // state
+            NSLog(@"%@", placemark.country); // country
+            
+            NSLog(@" tony == %@", placemark.country); // country
+          
             
             
         } else {
             NSLog(@"%@", error.debugDescription);
         }
-        
     } ];
     
+    
+
 }
+
 
 
 
@@ -149,12 +164,12 @@
     newContact = [NSEntityDescription
                   insertNewObjectForEntityForName:@"Contacts"
                   inManagedObjectContext:context];
-    [newContact setValue: _name.text forKey:@"name"];
-    [newContact setValue: _address.text forKey:@"address"];
-    [newContact setValue: _phone.text forKey:@"phone"];
-    _name.text = @"";
-    _address.text = @"";
-    _phone.text = @"";
+//    [newContact setValue: _name.text forKey:@"name"];
+//    [newContact setValue: _address.text forKey:@"address"];
+//    [newContact setValue: _phone.text forKey:@"phone"];
+//    _name.text = @"";
+//    _address.text = @"";
+//    _phone.text = @"";
     NSError *error;
     [context save:&error];
     _status.text = @"Contact saved";
@@ -163,6 +178,8 @@
     
 }
 
+
+/*
 - (IBAction)findContact:(id)sender {
     
     CoreDataAppDelegate *appDelegate =
@@ -201,10 +218,21 @@
     
     
 }
+*/
 
 
 
-
+- (IBAction)endTrip:(id)sender {
+    
+    // start with do I have one yet and do I need one
+    
+    [_locationManager setDelegate:self];
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    geocoder = [[CLGeocoder alloc] init]; // geo coding to get address
+    [_locationManager startUpdatingLocation]; // start the update service
+    
+    
+}
 
 
 
