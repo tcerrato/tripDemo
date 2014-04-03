@@ -71,6 +71,7 @@
 // tony created a location button for now and linked it to this
 // todo need an if location - null try again
 //  This is null on first button push should enable locations on page load then just use it on button click
+// Tony this is the start button this should write to a DB and the text view should read this value from the db not from the placemenark object
 - (IBAction)getLocation:(id)sender {
 
    // start with do I have one yet and do I need one
@@ -82,7 +83,7 @@
     [_locationManager startUpdatingLocation]; // start the update service
   
     
-
+ _startLocation.text = @"tony start";
     
 }
 
@@ -93,8 +94,6 @@
 // This code should feed the location manager becuase it has been assigned a deligate
 // this needs to return an object so the start and end buttons
 // should return the placemark
-
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"didUpdateToLocation: %@", newLocation);
@@ -236,6 +235,7 @@
     geocoder = [[CLGeocoder alloc] init]; // geo coding to get address
     [_locationManager startUpdatingLocation]; // start the update service
     
+    _endLocation.text = self.currentPlacemark.country;
     
     
     NSLog(@" bbbbbbbbbbbbbbbbbbbbbbbb == %@", self.currentPlacemark.country); // country
