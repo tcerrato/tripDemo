@@ -12,6 +12,13 @@
 
 @interface CoreDataViewController : UIViewController
 
+//tony
+@property (retain,nonatomic) CLPlacemark *currentPlacemark;
+//@property (strong,nonatomic) *MyLocationMonitor; *locationMonitor;
+
+
+
+
 - (IBAction)endTrip:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *endLocation;
 @property (weak, nonatomic) IBOutlet UITextView *startLocation;

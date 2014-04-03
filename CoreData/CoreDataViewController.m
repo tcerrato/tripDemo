@@ -17,7 +17,7 @@
 
     // TONY adding these to store info for geocodeing.
     CLGeocoder *geocoder;
-    CLPlacemark *placemark;
+    //CLPlacemark *placemark;
    // CLLocation *currentLocation;
 
 
@@ -37,7 +37,8 @@
     // Do any additional setup after loading the view.
     
     //tony new start up location services here
-    _locationManager = [[CLLocationManager alloc] init];
+   // _locationManager = [[CLLocationManager alloc] init];
+    self.locationManager=[[CLLocationManager alloc]init];
 
 }
 
@@ -65,24 +66,23 @@
 
 
 
+
+
 // tony created a location button for now and linked it to this
 // todo need an if location - null try again
 //  This is null on first button push should enable locations on page load then just use it on button click
 - (IBAction)getLocation:(id)sender {
 
    // start with do I have one yet and do I need one
+ 
     
     [_locationManager setDelegate:self];
     [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     geocoder = [[CLGeocoder alloc] init]; // geo coding to get address
-    
     [_locationManager startUpdatingLocation]; // start the update service
+  
+    
 
-    
-    
-
-    
-    
     
 }
 
@@ -93,6 +93,8 @@
 // This code should feed the location manager becuase it has been assigned a deligate
 // this needs to return an object so the start and end buttons
 // should return the placemark
+
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"didUpdateToLocation: %@", newLocation);
@@ -116,34 +118,32 @@
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         
         if (error == nil && [placemarks count] > 0) {
-            placemark = [placemarks lastObject];
+            self.currentPlacemark = [placemarks lastObject];
             
             // tony this was _status label but I want this int he text box
             _startLocation.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
-                                   placemark.subThoroughfare, placemark.thoroughfare,
-                                   placemark.postalCode, placemark.locality,
-                                   placemark.administrativeArea,
-                                   placemark.country];
+                                   self.currentPlacemark.subThoroughfare, self.currentPlacemark.thoroughfare,
+                                   self.currentPlacemark.postalCode, self.currentPlacemark.locality,
+                                   self.currentPlacemark.administrativeArea,
+                                   self.currentPlacemark.country];
             
             //tony some debugging to see how placemark breaks down
-            NSLog(@"%@", placemark.subThoroughfare); // address number
-            NSLog(@"%@", placemark.thoroughfare); // address St
-            NSLog(@"%@", placemark.postalCode); // zip
-            NSLog(@"%@", placemark.locality); // city
-            NSLog(@"%@", placemark.administrativeArea); // state
-            NSLog(@"%@", placemark.country); // country
+            NSLog(@"%@", self.currentPlacemark.subThoroughfare); // address number
+            NSLog(@"%@", self.currentPlacemark.thoroughfare); // address St
+            NSLog(@"%@", self.currentPlacemark.postalCode); // zip
+            NSLog(@"%@", self.currentPlacemark.locality); // city
+            NSLog(@"%@", self.currentPlacemark.administrativeArea); // state
+            NSLog(@"%@", self.currentPlacemark.country); // country
             
-            NSLog(@" tony == %@", placemark.country); // country
+            NSLog(@" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx == %@", self.currentPlacemark.country); // country
           
+            self.currentPlacemark = [placemarks lastObject];
             
             
         } else {
             NSLog(@"%@", error.debugDescription);
         }
     } ];
-    
-    
-
 }
 
 
@@ -226,10 +226,21 @@
     
     // start with do I have one yet and do I need one
     
+ //   [_locationManager setDelegate:self];
+ //   [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+ //   geocoder = [[CLGeocoder alloc] init]; // geo coding to get address
+ //   [_locationManager startUpdatingLocation]; // start the update service
+    
     [_locationManager setDelegate:self];
     [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     geocoder = [[CLGeocoder alloc] init]; // geo coding to get address
     [_locationManager startUpdatingLocation]; // start the update service
+    
+    
+    
+    NSLog(@" bbbbbbbbbbbbbbbbbbbbbbbb == %@", self.currentPlacemark.country); // country
+
+    
     
     
 }
